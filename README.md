@@ -1,6 +1,6 @@
 # Covid State and County Daily Numbers
 
-Overview: Creates a user-friendly hub to quickly check Covid dailies for States and Counties
+Overview: A user-friendly hub to quickly check Covid dailies for States and Counties
 
 <a href="https://julia-claira.github.io/Covid_Daily_Numbers/">Run Covid App</a>
 
