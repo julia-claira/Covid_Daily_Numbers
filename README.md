@@ -1,5 +1,10 @@
-# plotly_homework
+# Covid State and County Daily Numbers
 
-Interactive dashboard to Explore the Belly Button Biodiversity dataset, which catalogs the microbes that colonize human navels.
+Overview: A user-friendly hub to quickly check Covid dailies for States and Counties
 
-The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
+<a href="https://julia-claira.github.io/Covid_Daily_Numbers/">Run Covid App</a>
+
+<img src="https://github.com/julia-claira/Covid_Daily_Numbers/blob/main/covid_graph.png">
+       
+
+Pulls daily data from The Covid Act Now API and graphs generated in Javascript.
