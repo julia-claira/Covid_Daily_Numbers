@@ -198,7 +198,7 @@ d3.csv(usVaccURL).then((importedData)=>{
 
     //Finds all the objects for the state -- I'm going to append to take county info also
     function stateInformation() { 
-
+        
         var theStateinfo=[];//an array holding all the state information
         data.forEach(stateObject => {
             
@@ -214,7 +214,7 @@ d3.csv(usVaccURL).then((importedData)=>{
         }
         else {
             createLine(theStateinfo,"bar");
-            findCounties();
+            if (this.type!='checkbox') findCounties();
         }
 
     }
@@ -245,7 +245,7 @@ d3.csv(usVaccURL).then((importedData)=>{
         }
 
         //checks to see if zoom is on
-        if(d3.select(zoom).property('checked')===true){
+        if(d3.select(zoom).property('checked')===false){
             var startPoint=0;//includes the whole period
         }
         else {
@@ -257,6 +257,7 @@ d3.csv(usVaccURL).then((importedData)=>{
         var myStateSelection=myState;
         myStateSelection=myStateSelection.slice(startPoint,arrayLength+1);
 
+      
     
         //Creates Trace
         var trace2 = {
@@ -345,7 +346,7 @@ d3.csv(usVaccURL).then((importedData)=>{
              }
   
         var lastEntryVacc=myState[arrayLengthVacc];
-
+             
         //calculates changes over a week
         var myStateSeven=myState.slice(arrayLength+1-8,arrayLength+1);
         var myStateFourteen=myState.slice(arrayLength+1-15,arrayLength+1-7);
