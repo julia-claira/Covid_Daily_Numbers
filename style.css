@@ -1,12 +1,5 @@
 /* remove default margin and padding from body */
-#map
-{
-    width: 300px;
-    height:300px;
-    min-height: 100%;
-    min-width: 100%;
-    display: block;
-}
+
 
 html, body
 {
@@ -26,16 +19,27 @@ html, body
 }
 
 .container{
-    max-width:60em;
-    padding: 0.2em;
+    max-width:80em;
+    padding: .2em;
 }
 
 select {
     color: #000000; !important
 }
 
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #577590;
+    color: white;
+
+}
+
 .jumbotron {
+    height: 250px;
     background-size: cover;
-    padding-top: 20%;
-    padding-bottom: 20%;
+    background-position: 50% 50%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    background-color:  #577590;
+    color: #FFFFFF;
   }
