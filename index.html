@@ -20,8 +20,8 @@
       <!--------------State and County-->
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
-        <h1>State Covid Information</h1>
-        <p>Use the interactive charts below to explore the dataset</p>
+        <h1>State & County Covid Updates</h1>
+        <p>Track the daily trends in your area</p>
       </div>
     </div>
     <div class="row">
@@ -48,8 +48,8 @@
           <div></div>
           <div class="panel-heading">
             <h3 class="panel-title">Covid Info</h3><p></p>
-            <select id="selDataset"></select><br>
-            <select id="selDatasetCounty"></select>
+            State:  &nbsp &nbsp<select id="selDataset"></select><p></p>
+            County: <select id="selDatasetCounty"></select>
             <br>
 
           </div>
@@ -58,7 +58,14 @@
         </div>
       </div>
       <div class="col-md-9">
-        <div id="bar"><h2>Select Your State</h2></div>
+        <div id="bar">
+          <table>
+            <tr height="100"></tr>
+            <tr><td width="200"></td>
+            <td>
+          <h2>Select Your State</h2>
+          </td></tr></table> 
+        </div>
       </div>
 
 
@@ -90,12 +97,21 @@
     </div>
 
     <div class="row">
-      <div class="col-2 col-sm-2 col-md-2"></div>
-      <div class="col-2 col-sm-2 col-md-2">
-        Risk Level: A state or county’s overall risk level takes into account three metrics: daily new cases per 
-        100K (incidence), infection rate (Rt), and test positivity.
+      <div class="col-1 col-sm-1 col-md-1"></div>
+      <div class="col-11 col-sm-11 col-md-11">
+        <footer>
+        <p>This site pulls data in realtime from <a href="https://apidocs.covidactnow.org/">The Covid Act Now API.</a></p>
+        <p><font size="2"><i>
+        *Risk Level: A state or county’s overall risk level takes into account three metrics: daily new cases per 
+        100K (incidence), infection rate (Rt), and test positivity.<br>
+        *New Cases Trend: The increase or decrease of newly confirmed cases for state or county as compared to the previous week.<br>
+        *State ICU Capicty: Staffed intensive care unit (ICU) beds that are currently in use in the State (data at state level only).
+      </font></i>
+      </p>
+
+      
+        </footer>
       </div>
-      <div class="col-2 col-sm-2 col-md-2"></div>
     </div>
   </div>
   

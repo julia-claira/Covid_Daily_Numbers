@@ -164,27 +164,22 @@ d3.csv(usVaccURL).then((importedData)=>{
             var data1 = importedData;
             idFieldCounty.html("");//clears field
 
-            var myCounties=['select'];
+            var myCounties=[];
             data1.forEach(row=> {
                 if (myCounties.includes(row.county));
                 else {myCounties.push(row.county)};
             });
-
+            idFieldCounty.append("option").text("Select").attr('value',"selectC");
+                idFieldCounty.append("option").text("Entire State (default)").attr('value',"entire");
             myCounties.forEach((value) => {
                 idFieldCounty.append("option").text(value).attr('value',value);
             });
-            topFive(myCounties)
+    
         });
-        d3.select("#county").html("<h2>Select Your County</2>");
+   
         
     }
 
-    //function to find top five counties
-    function topFive(counties){
-
-        console.log(counties)
-
-    }
 
         //finds county info -- start here
         function countyData(){
@@ -199,14 +194,19 @@ d3.csv(usVaccURL).then((importedData)=>{
                     myCounties.push(countyObject)
                     }
                 });
-                d3.select("#county").html("");
-                createLine(myCounties,"bar");
+
+
+                if ((idFieldCounty.property("value")==="entire" || idFieldCounty.property("value")==="selectC") && this.id !="selDataset"){
+                    stateInformation();
+                }
+                else{
+                    createLine(myCounties,"bar");
+                };
             });
         }
 
     //Finds all the objects for the state and county
   function stateInformation() { 
-        console.log(`this: ${this.id}`);
         var theStateinfo=[];//an array holding all the state information
         data.forEach(stateObject => {
             
@@ -216,31 +216,32 @@ d3.csv(usVaccURL).then((importedData)=>{
         });
         d3.select("#bar").html("");
         if (idField.property("value")==="select"){
-            d3.select("#bar").html("<h2>Select Your State</2>");
+            d3.select("#bar").html("");
             d3.select("#county").html("");
             idFieldCounty.html("").html("");
         }
-        else {
+        else if ((idFieldCounty.property("value")==="entire" || idFieldCounty.property("value")==="selectC") && this.id !="selDataset") {
+            createLine(theStateinfo,"bar",idField.property("value"));
+        }
+        else { 
             createLine(theStateinfo,"bar",this.id);
             findCounties();
         }
-
     }
 
 
 
     //LINE GRAPH DRAW
     function createLine(myState,graphLocation,myEvent){
-        if (graphLocation==="county") {//this is old as now the graph is drawn in the same place
+        if ((idFieldCounty.property("value")!="entire" && idFieldCounty.property("value")!="selectC") && myEvent!="selDataset") {//this is old as now the graph is drawn in the same place
             var titleLocation=idFieldCounty.property("value");
             var metaLocation ="#sample-metadata";
             //var zoom ="#zoom-2";
         }
         else {
             var titleLocation=states[idField.property("value")];
-            var graphColors=['blue','orange'];
             var metaLocation ="#sample-metadata";
-            //var zoom ="#zoom";
+
         }
         //if the last entry doesn't have values yet, this eliminates it
         var arrayLength=myState.length-1;
@@ -251,13 +252,6 @@ d3.csv(usVaccURL).then((importedData)=>{
             }
         }
 
-        //checks to see if zoom is on
-        //if(d3.select(zoom).property('checked')===false){
-         //   var startPoint=0;//includes the whole period
-        //}
-        //else {
-        //    var startPoint=arrayLength-90;//will just look for the last two months;
-       // };
 
         //slices out information depending on if zoom is checked
         var lastEntry=myState[arrayLength];//finds last entry with values
@@ -328,16 +322,24 @@ d3.csv(usVaccURL).then((importedData)=>{
 
         var myData=[trace1,trace2];
 
+        //title for graph
+
+
         //Layout and Plot
         layout = {
-            title: {text:`${titleLocation} Covid Info`},
+            title: {
+                text:`${titleLocation} Covid Info`,
+                y:.993,
+                x:.15,
+                font:{size:26}
+            },
             title_x: 0,
             autosize: true,
             margin: {
                 l: 100,
                 r: 70,
-                b: 50,
-                t: 30,
+                b: 30,
+                t: 80,
                 pad: 2
             },
             legend: {
@@ -346,13 +348,22 @@ d3.csv(usVaccURL).then((importedData)=>{
                 xanchor: 'right',
                 bgcolor: 'transparent',
               },
-            yaxis: {title: 'New Cases',
+            yaxis: {
+                title: {
+                    text:'New Cases',
+                    font:{size: 16,
+                        color:"#277da1"}
+                },
                 titlefont: {color:"#277da1"},
                 tickfont: {color:"#277da1"},
                 fixedrange: true,
             },
             yaxis2: {
-                title: 'New Deaths',
+                title: {
+                    text:'New Deaths',
+                    font:{size: 16,
+                        color:"#f3722c"}
+                },
                 titlefont: {color: "#f3722c"},
                 tickfont: {color: "#f3722c"},
                 overlaying: 'y',
@@ -396,8 +407,6 @@ d3.csv(usVaccURL).then((importedData)=>{
         //calculates changes over a week
         var myStateSeven=myState.slice(arrayLength+1-8,arrayLength+1);
         var myStateFourteen=myState.slice(arrayLength+1-15,arrayLength+1-7);
-        console.log(myStateSeven[0]['locationId']);
-        console.log(myStateFourteen);
         var sevenCases=myStateSeven[7]["actuals.cases"]-myStateSeven[0]["actuals.cases"];
         var fourteenCases=myStateFourteen[7]["actuals.cases"]-myStateFourteen[0]["actuals.cases"];
         var casesChangeRaw=100-(fourteenCases/sevenCases*100);
@@ -409,7 +418,6 @@ d3.csv(usVaccURL).then((importedData)=>{
 
         var fullyVacc = (+lastEntryVacc["metrics.vaccinationsCompletedRatio"]*100);
         var partVacc = (+lastEntryVacc["metrics.vaccinationsInitiatedRatio"]*100)-fullyVacc;
-        console.log(+lastEntry["metrics.vaccinationsCompletedRatio"]+20000);
         metaHTML=metaHTML+`<p><b>Updated:</b> ${dateArrange}</p>`;
         metaHTML=metaHTML+`<p><b>Total Cases:</b> ${commas(lastEntry["actuals.cases"])}</p>`;
        // metaHTML=metaHTML+`<p><b>New Cases Trend:</b> ${casesChange}</p>`;
@@ -542,9 +550,6 @@ d3.csv(usVaccURL).then((importedData)=>{
             var icuNormal=lastEntry["actuals.icuBeds.currentUsageTotal"]-lastEntry["actuals.icuBeds.currentUsageCovid"];
             var icuTotal=lastEntry["actuals.icuBeds.capacity"];
 
-            console.log(`Total: ${icuTotal}`);
-            console.log(`Total Covid: ${icuCovid}`);
-            console.log(`Total Normal: ${icuNormal}`);
 
             var icuCovidPerc=icu.append('rect').attr("width", (icuCovid/icuTotal*180)).attr("height", 30)
             .attr("x", 14).attr("y", 30).style("fill","#577590");
@@ -649,7 +654,7 @@ d3.csv(usVaccURL).then((importedData)=>{
     var countycode = "data/fips_zip_x.txt";  
     d3.csv(countycode).then((importedData2)=>{
         var data3 = importedData2;
-        console.log(data3)});
+        });
 /*
     var myMap = L.map("map", {
       center: statesLoc['OR'],
