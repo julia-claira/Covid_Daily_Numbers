@@ -43,8 +43,8 @@
           <div></div>
           <div class="panel-heading">
             <h3 class="panel-title">Covid Info</h3><p></p>
-            State:  &nbsp &nbsp<select id="selDataset"></select><p></p>
-            County: <select id="selDatasetCounty"></select>
+            State:  &nbsp &nbsp<select id="selDataset" href=#></select><p></p>
+            County: <select id="selDatasetCounty" href=#></select>
             <br>
           
           <!--------------Graph-->
@@ -144,5 +144,8 @@
   
   
 </body>
+
+if(isIOS())
+  $('.modal').removeClass('fade');
 
 </html>
