@@ -328,17 +328,17 @@ d3.csv(usVaccURL).then((importedData)=>{
         //Layout and Plot
         layout = {
             title: {
-                text:`${titleLocation} Covid Info`,
+                text:`${titleLocation}`,
                 y:.993,
                 x:.15,
-                font:{size:26}
+                font:{size:28}
             },
             title_x: 0,
             autosize: true,
             margin: {
                 l: 100,
                 r: 70,
-                b: 30,
+                b: 40,
                 t: 80,
                 pad: 2
             },
@@ -346,7 +346,7 @@ d3.csv(usVaccURL).then((importedData)=>{
                 y: 1,
                 x: 0.2,
                 xanchor: 'right',
-                bgcolor: 'transparent',
+                bgcolor: 'white',
               },
             yaxis: {
                 title: {
@@ -438,6 +438,7 @@ d3.csv(usVaccURL).then((importedData)=>{
             if (theRisk==0 || theRisk==2)defAdjust=10;
             var RiskLevelDef={0:' Low',1:'Medium',2:' High',3:'Critical',4:'Very High',5:'Extreme'};
 
+            //gauge title and footer
             d3.select("#gaugeTitle").html("");
             d3.select("#gaugeFooter").html("");
             var gaugeSVG=d3.select("#gaugeTitle").append("svg").attr('height',30).attr('width',200);
@@ -446,7 +447,18 @@ d3.csv(usVaccURL).then((importedData)=>{
 
             var footerSVG=d3.select("#gaugeFooter").append("svg").attr('height',60).attr('width',200);
             footerSVG.append('text').text(RiskLevelDef[theRisk]).attr("x", 75+defAdjust).attr("y",15)
-            .style("fill","black").attr('font-size','15px').style("font-style","italic")
+            .style("fill","black").attr('font-size','15px').style("font-style","italic");
+
+            //gauge title and footer for small screen
+            d3.select("#gaugeTitle_xs").html("");
+            d3.select("#gaugeFooter_xs").html("");
+            var gaugeSVG=d3.select("#gaugeTitle_xs").append("svg").attr('height',30).attr('width',200);
+            gaugeSVG.append('text').text('Risk Level').attr("x", 60).attr("y",15)
+            .style("fill","black").attr('font-size','19px');
+
+            var footerSVG=d3.select("#gaugeFooter_xs").append("svg").attr('height',60).attr('width',200);
+            footerSVG.append('text').text(RiskLevelDef[theRisk]).attr("x", 75+defAdjust).attr("y",15)
+            .style("fill","black").attr('font-size','15px').style("font-style","italic");
 
             var alertColors=["#43aa8b", "#90be6d", "#f9c74f","#f94144", "#f9844a", "white"];
             var data = [
@@ -483,10 +495,59 @@ d3.csv(usVaccURL).then((importedData)=>{
             
             var layout = { width: 180, height: 75, margin: { l:20,r:0,t: 0, b: 0 } };
             Plotly.newPlot('gauge', data, layout,{displayModeBar: false});
+            Plotly.newPlot('gauge_xs', data, layout,{displayModeBar: false});
+    
         }
 
+        //add arrow indicator
         d3.select("#polyarrow").html("");
         var svg=d3.select("#polyarrow").append("svg").attr("width","200").attr("height","180");
+    
+        
+        //up arrow
+        var arrowColor="";
+        if (casesChangeRaw>=0){arrowColor="#f94144"}
+        else {arrowColor="#43aa8b"};
+        
+        var aM=.13;
+        var aX=48;
+        var aY=8;
+        var aU=[(110*aM)+aX,(450*aM)+aY,(360*aM)+aX,(50*aM)+aY,(610*aM)+aX,(450*aM)+aY];
+
+        if (casesChangeRaw>=0){
+            var upArrow=svg
+            .append('polyline').attr('opacity',1)
+            .attr('points', `${aU[0]} ${aU[1]}, ${aU[2]} ${aU[3]+10}, ${aU[4]} ${aU[5]}`)
+            .style('fill', arrowColor);
+
+            var myBoxLine=svg.append('rect').attr("width", 28).attr("height", 40)
+            .attr("x", 80.2).attr("y", 60).style("fill",arrowColor);
+        }
+        else {
+            aY=10;
+            aD=[(110*aM)+aX,(450*aM)+aY,(360*aM)+aX,(980*aM)+aY,(610*aM)+aX,(450*aM)+aY]
+        
+            var downArrow=svg
+            .append('polyline').attr('opacity',1)
+            .attr('points', `${aD[0]} ${aD[1]}, ${aD[2]} ${aD[3]-30}, ${aD[4]} ${aD[5]}`)
+            .style('fill', arrowColor);
+
+            var myBoxLine=svg.append('rect').attr("width", 28).attr("height", 40)
+            .attr("x", 80.2).attr("y", 30).style("fill",arrowColor);
+        }
+        
+
+        svg.append('text').text(casesChange).attr("x", 50.2).attr("y",140)
+        .style("fill","black")
+        .attr('font-size','24px');
+
+        svg.append('text').text('New Cases Trend').attr("x", 18.2).attr("y",15)
+        .style("fill","black")
+        .attr('font-size','20px');
+
+        //add arrow indicator for small screens
+        d3.select("#polyarrow_xs").html("");
+        var svg=d3.select("#polyarrow_xs").append("svg").attr("width","200").attr("height","180");
     
         
         //up arrow
@@ -536,6 +597,104 @@ d3.csv(usVaccURL).then((importedData)=>{
         if(myEvent==="selDataset"){
             icu=d3.select("#icu").html("");
             icu=d3.select("#icu").append("svg");
+
+            //header
+            icu.append('text').text('State ICU Beds Capacity').attr("x", 0).attr("y",15)
+                .style("fill","black")
+                .attr('font-size','19px');
+            
+                var icuBox=icu.append('rect').attr("width", 180).attr("height", 30)
+            .attr("x", 14).attr("y", 30).style("stroke","black").style("fill","white") .attr("stroke-width",1);
+
+            
+            var icuCovid=lastEntry["actuals.icuBeds.currentUsageCovid"];
+            var icuNormal=lastEntry["actuals.icuBeds.currentUsageTotal"]-lastEntry["actuals.icuBeds.currentUsageCovid"];
+            var icuTotal=lastEntry["actuals.icuBeds.capacity"];
+
+
+            var icuCovidPerc=icu.append('rect').attr("width", (icuCovid/icuTotal*180)).attr("height", 30)
+            .attr("x", 14).attr("y", 30).style("fill","#577590");
+
+            var icuNormalPerc=icu.append('rect').attr("width", (icuNormal/icuTotal*180)).attr("height", 30)
+            .attr("x", 14+icuCovid/icuTotal*180).attr("y", 30).style("fill","#43aa8b");
+
+            // icu readouts
+            icu.append('rect').attr("width", 10).attr("height", 10)
+            .attr("x", 15).attr("y", 67).style("fill","#577590").style("stroke","black");
+
+            icu.append('text').text(`Covid Usage:  ${icuCovid}`).attr("x", 30).attr("y",78)
+            .style("fill","black")
+            .attr('font-size','15px');
+
+            icu.append('rect').attr("width", 10).attr("height", 10)
+            .attr("x", 15).attr("y", 87).style("fill","#43aa8b").style("stroke","black");
+
+            icu.append('text').text(`Other Usage:  ${icuNormal}`).attr("x", 30).attr("y",98)
+            .style("fill","black")
+            .attr('font-size','15px');
+
+            icu.append('rect').attr("width", 10).attr("height", 10)
+            .attr("x", 15).attr("y", 107).style("fill","white").style("stroke","black");
+
+            icu.append('text').text(`Open Beds:  ${icuTotal-icuNormal-icuCovid}`).attr("x", 30).attr("y",118)
+            .style("fill","black")
+            .attr('font-size','15px');
+        };
+
+            //icu bar horizontal
+    
+        if(myEvent==="selDataset"){
+            icu=d3.select("#icu").html("");
+            icu=d3.select("#icu").append("svg");
+
+            //header
+            icu.append('text').text('State ICU Beds Capacity').attr("x", 0).attr("y",15)
+                .style("fill","black")
+                .attr('font-size','19px');
+            
+                var icuBox=icu.append('rect').attr("width", 180).attr("height", 30)
+            .attr("x", 14).attr("y", 30).style("stroke","black").style("fill","white") .attr("stroke-width",1);
+
+            
+            var icuCovid=lastEntry["actuals.icuBeds.currentUsageCovid"];
+            var icuNormal=lastEntry["actuals.icuBeds.currentUsageTotal"]-lastEntry["actuals.icuBeds.currentUsageCovid"];
+            var icuTotal=lastEntry["actuals.icuBeds.capacity"];
+
+
+            var icuCovidPerc=icu.append('rect').attr("width", (icuCovid/icuTotal*180)).attr("height", 30)
+            .attr("x", 14).attr("y", 30).style("fill","#577590");
+
+            var icuNormalPerc=icu.append('rect').attr("width", (icuNormal/icuTotal*180)).attr("height", 30)
+            .attr("x", 14+icuCovid/icuTotal*180).attr("y", 30).style("fill","#43aa8b");
+
+            // icu readouts
+            icu.append('rect').attr("width", 10).attr("height", 10)
+            .attr("x", 15).attr("y", 67).style("fill","#577590").style("stroke","black");
+
+            icu.append('text').text(`Covid Usage:  ${icuCovid}`).attr("x", 30).attr("y",78)
+            .style("fill","black")
+            .attr('font-size','15px');
+
+            icu.append('rect').attr("width", 10).attr("height", 10)
+            .attr("x", 15).attr("y", 87).style("fill","#43aa8b").style("stroke","black");
+
+            icu.append('text').text(`Other Usage:  ${icuNormal}`).attr("x", 30).attr("y",98)
+            .style("fill","black")
+            .attr('font-size','15px');
+
+            icu.append('rect').attr("width", 10).attr("height", 10)
+            .attr("x", 15).attr("y", 107).style("fill","white").style("stroke","black");
+
+            icu.append('text').text(`Open Beds:  ${icuTotal-icuNormal-icuCovid}`).attr("x", 30).attr("y",118)
+            .style("fill","black")
+            .attr('font-size','15px');
+        };
+
+        //icu bar horizontal for small screen
+    
+        if(myEvent==="selDataset"){
+            icu=d3.select("#icu_xs").html("");
+            icu=d3.select("#icu_xs").append("svg");
 
             //header
             icu.append('text').text('State ICU Beds Capacity').attr("x", 0).attr("y",15)

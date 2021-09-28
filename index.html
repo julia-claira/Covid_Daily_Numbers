@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Community Covid Tracker</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -59,14 +59,15 @@
             <tr height="100"></tr>
             <tr><td width="200"></td>
             <td>
-          <h2>Select Your State</h2>
+          <div class="hidden-xs"><h2>Select Your State</h2></div>
           </td></tr></table> 
         </div>
       </div>
     </div>
 
     <!--------------Gauge/Arrow/Bar icons-->
-    <div class="row">
+    <p><br></p>
+    <div class="row hidden-xs">
       <div class="col-3 col-sm-1 col-md-2"></div>
       <div class="col-3 col-sm-3 col-md-3">
         <div id="gaugeTitle"></div> 
@@ -81,6 +82,29 @@
       </div>
       <div class="col-0 col-sm-1 col-md-0"></div>
     </div>
+
+    <div class="row visible-xs">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-6">
+        <p><br></p><br>
+        <div id="gaugeTitle_xs"></div> 
+        <div id="gauge_xs"></div>
+        <div id="gaugeFooter_xs"></div> 
+      </div>
+    </div>
+    <div class="row visible-xs">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-6">
+        <div id="polyarrow_xs"></div>  
+      </div> 
+    </div>    
+    <div class="row visible-xs">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-6">
+        <div id="icu_xs"></div>
+      </div>
+    </div>
+
     <hr style="width:100%", size="6", color=black>
 
     <!--------------footer data-->
