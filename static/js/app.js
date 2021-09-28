@@ -579,56 +579,9 @@ d3.csv(usVaccURL).then((importedData)=>{
             .style("fill","black")
             .attr('font-size','15px');
         };
-
         
 
-/*
-        var trace1 = {
-            x: [70],
-            y: ['giraffes'],
-            orientation: 'h',
-            marker: {
-                color: '#f9c74f',
-              },
-            name: 'SF Zoo',
-            type: 'bar',
-          };
-          
-          var trace2 = {
-            x: [12],
-            y: ['giraffes'],
-            orientation: 'h',
-            marker: {
-                color: '#277da1',
-              },
-            name: 'LA Zoo',
-            type: 'bar',
-          };
-
-          var trace3 = {
-            x: [100-70-12],
-            y: ['giraffes'],
-            orientation: 'h',
-            marker: {
-                color: 'gray',
-              },
-            name: 'Total',
-            type: 'bar',
-          };
-          
-          var data = [trace1, trace2,trace3];
-          
-          var layout = {barmode: 'stack'};
-          var layout = { width: 235, height: 110,
-            margin: { l:0,r:0,t: 60, b: 0 },
-            barmode: 'stack'};
-          
-          Plotly.newPlot('icu', data, layout);*/
-
     };
-
-
-
 
 
     //MAIN----------------------------------------
@@ -641,39 +594,13 @@ d3.csv(usVaccURL).then((importedData)=>{
     var idFieldCounty= d3.select("#selDatasetCounty");//
     idFieldCounty.on("change", countyData);
     
-
-    //var zoomBox= d3.select("#zoom");//
-    //zoomBox.on("change", stateInformation);
-
-    //var zoomBox2= d3.select("#zoom-2");//
-    //zoomBox2.on("change", countyData);
-
-
-    
+ 
 
     var countycode = "data/fips_zip_x.txt";  
     d3.csv(countycode).then((importedData2)=>{
         var data3 = importedData2;
         });
-/*
-    var myMap = L.map("map", {
-      center: statesLoc['OR'],
-        zoom: 7
-      });
-*/
-      
-      
-      // Adding a tile layer (the background map image) to our map
-      // We use the addTo method to add objects to our map
-     /* L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-        attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-        tileSize: 512,
-        maxZoom: 18,
-        zoomOffset: -1,
-        id: "mapbox/streets-v11",
-        accessToken: API_KEY
-      }).addTo(myMap);
-    */
+
 
 });  
 

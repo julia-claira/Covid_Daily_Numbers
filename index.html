@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
   crossorigin="" />
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 
 <body>
@@ -19,7 +19,7 @@
 
       <!--------------State and County-->
     <div class="row">
-      <div class="col-md-12 jumbotron text-center">
+      <div class="col-md-12 jumbotron text-center" style="background-image: url(static/digital_map.jpg)">
         <h1>State & County Covid Updates</h1>
         <p>Track the daily trends in your area</p>
       </div>
@@ -29,12 +29,7 @@
       <div class="col-md-6">
       </div>
 
-         <!--- <input type="checkbox" id="zoom" name="zoom" value="zoom">
-          <label for="zoom"> Zoom In </label><br>-->
-  
- 
-
-
+  <!--------------Panel-->
     </div>
     <div class="row">
       <div class="col-md-3"> 
@@ -51,7 +46,8 @@
             State:  &nbsp &nbsp<select id="selDataset"></select><p></p>
             County: <select id="selDatasetCounty"></select>
             <br>
-
+          
+          <!--------------Graph-->
           </div>
           <div id="sample-metadata" class="panel-body">
           </div>
@@ -67,19 +63,9 @@
           </td></tr></table> 
         </div>
       </div>
-
-
-     <!-- <div class="col-md-5">
-        <div id="map-holder">
-          <div class="container fill">
-            <div id="map"></div>
-          </div>
-      </div>-->
     </div>
-    <hr style="width:100%", size="6", color=black>  
 
-    <!--------------COUNTY-->
-
+    <!--------------Gauge/Arrow/Bar icons-->
     <div class="row">
       <div class="col-3 col-sm-1 col-md-2"></div>
       <div class="col-3 col-sm-3 col-md-3">
@@ -95,11 +81,12 @@
       </div>
       <div class="col-0 col-sm-1 col-md-0"></div>
     </div>
+    <hr style="width:100%", size="6", color=black>
 
+    <!--------------footer data-->
     <div class="row">
       <div class="col-1 col-sm-1 col-md-1"></div>
       <div class="col-11 col-sm-11 col-md-11">
-        <footer>
         <p>This site pulls data in realtime from <a href="https://apidocs.covidactnow.org/">The Covid Act Now API.</a></p>
         <p><font size="2"><i>
         *Risk Level: A state or county’s overall risk level takes into account three metrics: daily new cases per 
@@ -108,9 +95,13 @@
         *State ICU Capicty: Staffed intensive care unit (ICU) beds that are currently in use in the State (data at state level only).
       </font></i>
       </p>
-
-      
-        </footer>
+      <p>
+        <br>
+      </p>
+      <br>
+      <font size="2">
+       Page created and mainted by Julia Claira Kauffmann. Contact at: <a href = "mailto: julia.claira@gmail.com">julia.claira@gmail.com</a>
+      </font>
       </div>
     </div>
   </div>
@@ -121,15 +112,8 @@
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
   crossorigin=""></script>
-  <script type="text/javascript" src="./static/js/config.js"></script>
-  
- 
+  <script type="text/javascript" src="./static/js/config.js"></script>  
   <script src="./static/js/app.js"></script>
-
-  <!-- <script type="text/javascript" src="static/js/heatmap.js"></script> -->
-  <!-- Leaflet heatmap plugin-->
-  <!--<script type="text/javascript" src="static/js/leaflet-heat.js"></script>
-  <script src="./static/js/bonus.js"></script>-->
   
   
 </body>
