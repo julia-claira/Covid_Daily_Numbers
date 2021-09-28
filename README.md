@@ -8,3 +8,4 @@ Overview: A user-friendly hub to quickly check Covid dailies for States and Coun
        
 
 Pulls daily data from The Covid Act Now API and graphs generated in Javascript.
+
