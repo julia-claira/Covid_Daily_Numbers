@@ -143,7 +143,7 @@ d3.csv(usVaccURL).then((importedData)=>{
 
 
     function commas(x) {
-        return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     //Replaces "" fields with 0
