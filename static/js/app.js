@@ -755,11 +755,6 @@ d3.csv(usVaccURL).then((importedData)=>{
     
  
 
-    var countycode = "data/fips_zip_x.txt";  
-    d3.csv(countycode).then((importedData2)=>{
-        var data3 = importedData2;
-        });
-
 
 });  
 
