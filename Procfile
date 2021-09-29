@@ -1,1 +1,1 @@
-Procfileweb: gunicorn appp:app
+Procfile web: gunicorn appp:app
