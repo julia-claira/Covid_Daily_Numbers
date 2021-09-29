@@ -1,1 +1,1 @@
-web: gunicorn graph:app
+Procfileweb: gunicorn graph:app
