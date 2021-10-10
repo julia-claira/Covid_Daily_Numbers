@@ -1,30 +1,35 @@
-# Web-Scraper: Transgender issues in The New York Times
+# Covid State and County Daily Numbers
 
 ## Description 
 
-Visibility is key to understanding, acceptance, and ultimately, hopefully, equality.  I wanted to measure how transgender representation has evolved over the decades. To that end, I scraped The New York Times' archives, seeing that periodical as a valid barometer for the cutural milieu.
+I developed this user-friendly app with a basic interface to make it easier to track daily numbers in one's area. Other sites require digging through pages of complex data and graphs, information that the average person doesn't care about. I've learned that to effectively reach people, what you leave is just as important as what you include.
   
+## Run
 
+The below link takes you to the app, running on Heroku:
+
+[Covid Daily Numbers app](https://covid-county.herokuapp.com/?fbclid=IwAR2fmy3hkjaIgXuhbl1QnknUD2_0nLjfaNe43LTqdZ1HGwLp1rvEMU4ewE4)
 
 
 ## Table of Contents
-* [Results](#Results)
+* [Run](#Results)
 * [Tools](#Tools)
-* [Methodology](#Methodology)
+* [Data](#Data)
+* [Graphs](#Graphs)
 * [Data-Cleaning](#Data-Cleaning)
 * [Contact](#Contact)
 
+
+
+## Tools
+
+JavaScript, Plotly.js, D3, Bootstrap, HTML5, CSS, Flask, Python
+
   
 
-## Results
+## Data
 
-![line graph](/images/nytimes_trans_graph.png)
-
-Articles were few and far between for the 1980s and 1990s. With lesbian and gay issues coming more to the forefront in the 2000s, there was an small increase in transgender related articles. In 2014 and 2015 the number of articles rocketed, most likely due to the visibility of people like actress Laverne Cox and Caitlyn Jenner. The following years, issues such as trans women in sports became a heated topic covered by media.
-
-![pie graph](/images/nytimes_pie_combined.jpg)
-
-In the past 20 years, Trans people's representation grew in sections such as Arts, Sports, and Life, indicating broader cultural visibility.
+This app pulls data from [Covid Act Now API](https://apidocs.covidactnow.org/)
 
 
 
