@@ -19,7 +19,7 @@ I developed this user-friendly app with a basic interface to make it easier to t
 
 The below link takes you to the app, running on Heroku:
 
-[Covid Daily Numbers app](https://covid-county.herokuapp.com/?fbclid=IwAR2fmy3hkjaIgXuhbl1QnknUD2_0nLjfaNe43LTqdZ1HGwLp1rvEMU4ewE4)
+[Covid Daily Numbers app](https://covid-county.herokuapp.com)
 
 
   
