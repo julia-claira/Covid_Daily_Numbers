@@ -22,22 +22,22 @@ The below link takes you to the app, running on Heroku:
 [Covid Daily Numbers app](https://covid-county.herokuapp.com/?fbclid=IwAR2fmy3hkjaIgXuhbl1QnknUD2_0nLjfaNe43LTqdZ1HGwLp1rvEMU4ewE4)
 
 
+  
+## Graphs
+
+Daily cases and deaths for entire pandemic. User can zoom in as well as see daily tallies by moving their cursor over the graph.  
+
+![Sample Graph](static/graph_sample.png)
+
+Shows the risk level, trend, and ICU capacity for the area presently. (I calculate trend by taking the total confirmed cases of the last seven days and comparing it the previous week.)
+
+![Sample Graphs](static/graphs_3.png)
+
 
 
 ## Tools
 
 JavaScript, Plotly.js, D3, Bootstrap, HTML5, CSS, Flask, Python
-
-
-  
-## Graphs
-
-Shows daily cases and deaths from the start of the pandemic to present. User can zoom in as well as see daily tallies by moving their cursor over the graph.  
-
-![Sample Graph](static/graph_sample.png)
-
-Shows the risk level, trend, and ICU capacity for the area presently. (I calculate trend by taking the total confirmed cases of the last seven days and comparing it the previous week.)
-![Sample Graphs](static/graphs_3.png)
 
 
 
